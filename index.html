@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS HelloWorld</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/controllers/albumController.js"></script>
+
+  </head>
+  <body ng-app="gft">
+    <div class="header">
+      <div class="container">
+        <h1>Album list</h1>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="container" ng-controller="AlbumController">
+        <table class="table table-bordered table-hover table-condensed span8">
+          <thead>
+            <tr>
+              <th>Artist</th>
+              <th>Title</th>
+              <th># Tracks</th>              
+              <th>Score</th>
+              <th>Upvote</th>
+              <th>Downvote</th>
+              <th>List tracks</th>
+              <th>Tracks</th>
+            </tr>
+          </thead>
+          <tr ng-repeat="album in albums">
+            <td>{{ album.artist }}</td>
+            <td>{{ album.title }}</td>
+            <td>{{ album.tracks.length }}</td>            
+            <td>{{ album.score }}</td>
+            <td>
+              <button class="btn btn-success" ng-click="upvote($index)">+</button>
+            </td>
+            <td>
+              <button class="btn btn-danger" ng-click="downvote($index)">-</button>
+            </td>
+            <td>
+              <button class="btn btn-info" ng-click="listTracks($index)" id="track-list-btn-{{ $index }}">List tracks</button>
+            </td>
+            <td>
+              <div id="track-list-{{ $index }}" class="hidden">
+                <ol>
+                  <li ng-repeat="track in album.tracks"/>
+                    {{ track.name }}<br/>
+                  </li>
+                </ol>
+              </div>
+            </td>
+          </tr>
+        </table>        
+      </div>
+    </div>
+  </body>
+</html>
